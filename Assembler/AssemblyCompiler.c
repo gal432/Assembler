@@ -1,9 +1,4 @@
-#include <stdio.h>
 #include "AssemblyCompiler.h"
-#include "StringFuncs.h"
-#include "InformationTranslator.h"
-#include "OutputCreator.h"
-
 
 void compileAssembly(char* name, NodesList* lines) {
 	InformationHolder* holder = createInformationHolder();

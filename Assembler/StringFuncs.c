@@ -1,5 +1,3 @@
-#include <string.h>
-#include <ctype.h>
 #include "StringFuncs.h"
 
 /*Removes the white spaces in a string */

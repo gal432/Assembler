@@ -1,5 +1,3 @@
-#include <string.h>
-#include "InstructionHandler.h"
 #include "StringFuncs.h"
 
 void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {

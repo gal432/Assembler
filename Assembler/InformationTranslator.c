@@ -1,7 +1,4 @@
-#include <string.h>
-#include <math.h>
 #include "InformationTranslator.h"
-#include "StringFuncs.h"
 
 NodesList* translateInforamtion(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols) {
 	NodesList* words = createNodesList(sizeof(WordHolder));

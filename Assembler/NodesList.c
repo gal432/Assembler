@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <string.h>
 #include "NodesList.h"
 
 NodesList* createNodesList(int elementSize) {

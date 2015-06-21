@@ -1,8 +1,15 @@
+#ifndef INFORMATION_TRANSLATOR_H
+#define INFORMATION_TRANSLATOR_H
+
+#include <string.h>
+#include <math.h>
+
 #include "General.h"
 #include "NodesList.h"
 #include "InstructionHandler.h"
 #include "GuidelineHandler.h"
 #include "Word.h"
+#include "StringFuncs.h"
 
 NodesList* translateInforamtion(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols);
 
@@ -25,3 +32,4 @@ WordHolder* createWordHolder(int address, int* wordValue);
 void addFirstWord(int* wordAddress, NodesList* words, Instruction* instruction);
 
 void addArgumentsWords(int instructionAddress, int* wordAddress, NodesList* words, NodesList* arguments, NodesList* instructionSymbols, NodesList* dataSymbols, NodesList* externSymbols, NodesList* registers);
+#endif

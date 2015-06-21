@@ -1,7 +1,4 @@
-#include <stdlib.h>
 #include "InformationHolder.h"
-#include "NodesList.h"
-#include "General.h"
 
 InformationHolder* createInformationHolder() {
 	InformationHolder* holder = (InformationHolder*)safeMalloc(sizeof(InformationHolder));

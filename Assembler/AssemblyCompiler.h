@@ -1,9 +1,14 @@
 #ifndef ASSEMBLY_COMPILER_H
 #define ASSEMBLY_COMPILER_H
 
+#include <stdio.h>
+
 #include "InformationHolder.h"
 #include "General.h"
 #include "NodesList.h"
+#include "StringFuncs.h"
+#include "InformationTranslator.h"
+#include "OutputCreator.h"
 
 #define COMMENT_LINE_START ';'
 #define GUIDELINE_LINE_START '.'

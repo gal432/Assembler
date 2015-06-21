@@ -1,6 +1,10 @@
 #ifndef STRINGS_FUNCS_H
 #define STRINGS_FUNCS_H
 
+#include <string.h>
+#include <ctype.h>
+
+#include "InstructionHandler.h"
 #include "General.h"
 
 /* Removes the white spaces in a string */

@@ -1,10 +1,14 @@
 #ifndef INFORMATION_HOLDER_H
 #define INFORMATION_HOLDER_H
 
+#include <stdlib.h>
+
 #include "NodesList.h"
 #include "InstructionHandler.h"
 #include "GuidelineHandler.h"
 #include "ErrorHandler.h"
+#include "NodesList.h"
+#include "General.h"
 
 typedef struct
 {

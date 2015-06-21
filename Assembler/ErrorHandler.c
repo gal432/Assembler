@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "ErrorHandler.h"
 
 ErrorHolder* createErrorHolder() {
