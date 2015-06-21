@@ -4,6 +4,8 @@
 #include "General.h"
 #include "NodesList.h"
 #include "ErrorHandler.h"
+#include "Word.h"
+#include "AssemblyLine.h"
 
 #define DATA_SIZE 1000
 

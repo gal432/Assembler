@@ -5,6 +5,7 @@
 #include "NodesList.h"
 #include "Commands.h"
 #include "ErrorHandler.h"
+#include "AssemblyLine.h"
 
 #define REGISTER0 "r0"
 #define REGISTER0_VALUE 0

@@ -2,6 +2,7 @@
 #include "NodesList.h"
 #include "InstructionHandler.h"
 #include "GuidelineHandler.h"
+#include "Word.h"
 
 NodesList* translateInforamtion(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols);
 

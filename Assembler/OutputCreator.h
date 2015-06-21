@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "NodesList.h"
+#include "Word.h"
 
 #define OBJECT_EXTENSION "ob"
 #define ENTRIES_EXTENSION "ent"
