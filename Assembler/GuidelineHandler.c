@@ -5,11 +5,14 @@
 
 GuidelineHolder* CreateGuidelineHolder() {
 	GuidelineHolder* holder = (GuidelineHolder*)safeMalloc(sizeof(GuidelineHolder));
+	
 	holder->symbols = createNodesList(sizeof(int));
-	holder->externSymbols = createNodesList(sizeof(NodesList));
 	holder->enterySymbols = createNodesList(sizeof(int));
+	holder->externSymbols = createNodesList(sizeof(NodesList));
+	
 	holder->counter = 0;
 	holder->errorHolder = createErrorHolder();
+	
 	return holder;
 }
 

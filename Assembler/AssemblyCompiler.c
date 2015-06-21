@@ -4,12 +4,15 @@ void compileAssembly(char* name, NodesList* lines) {
 	InformationHolder* holder = createInformationHolder();
 	handleFirstRun(holder, lines);
 	checkSymbolsUsedInArguments(holder);
+	
 	addInstructionsCounterToDataCounter(holder->data->symbols, holder->instructions->counter);
 	setEntriesValues(holder);
-	if (holder->errorHolder->hasError || holder->data->errorHolder->hasError || holder->instructions->errorHolder->hasError)
+	
+	if (holder->errorHolder->hasError || holder->instructions->errorHolder->hasError || holder->data->errorHolder->hasError)
 		printErrors(name, holder);
 	else
 		handleSecondRun(name, holder, lines);
+	
 	freeInformationHolder(holder);
 }
 

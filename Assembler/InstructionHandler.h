@@ -7,29 +7,29 @@
 #include "ErrorHandler.h"
 #include "AssemblyLine.h"
 
-#define REGISTER0 "r0"
-#define REGISTER0_VALUE 0
+#define REG0 "r0"
+#define REG0_VALUE 0
 
-#define REGISTER1 "r1"
-#define REGISTER1_VALUE 1
+#define REG1 "r1"
+#define REG1_VALUE 1
 
-#define REGISTER2 "r2"
-#define REGISTER2_VALUE 2
+#define REG2 "r2"
+#define REG2_VALUE 2
 
-#define REGISTER3 "r3"
-#define REGISTER3_VALUE 3
+#define REG3 "r3"
+#define REG3_VALUE 3
 
-#define REGISTER4 "r4"
-#define REGISTER4_VALUE 4
+#define REG4 "r4"
+#define REG4_VALUE 4
 
-#define REGISTER5 "r5"
-#define REGISTER5_VALUE 5
+#define REG5 "r5"
+#define REG5_VALUE 5
 
-#define REGISTER6 "r6"
-#define REGISTER6_VALUE 6
+#define REG6 "r6"
+#define REG6_VALUE 6
 
-#define REGISTER7 "r7"
-#define REGISTER7_VALUE 7
+#define REG7 "r7"
+#define REG7_VALUE 7
 
 
 typedef struct {

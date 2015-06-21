@@ -109,17 +109,22 @@ char* getCommandName(char** linePtr) {
 }
 
 InstructionsHolder* CreateInstructions() {
-	InstructionsHolder* instructionsHolder = (InstructionsHolder*)safeMalloc(sizeof(InstructionsHolder));
-	instructionsHolder->symbols = createNodesList(sizeof(int));
-	instructionsHolder->commands = createNodesList(sizeof(Command));
-	instructionsHolder->registers = createNodesList(sizeof(char*));
-	addRegisters(instructionsHolder->registers);
-	instructionsHolder->symbolsUsedInArguments = createNodesList(sizeof(int));
-	addCommands(instructionsHolder->commands);
-	instructionsHolder->counter = MEMORY_ADDRESS_START;
-	instructionsHolder->instructions = createNodesList(sizeof(Instruction));
-	instructionsHolder->errorHolder = createErrorHolder();
-	return instructionsHolder;
+	InstructionsHolder* holder = (InstructionsHolder*)safeMalloc(sizeof(InstructionsHolder));
+	
+	/*init new lists*/
+	holder->commands = createNodesList(sizeof(Command));
+	holder->symbols = createNodesList(sizeof(int));
+	holder->symbolsUsedInArguments = createNodesList(sizeof(int));
+	holder->instructions = createNodesList(sizeof(Instruction));
+	holder->registers = createNodesList(sizeof(char*));
+	
+	/*add relevant values*/
+	holder->counter = MEMORY_ADDRESS_START;
+	addRegisters(holder->registers);
+	addCommands(holder->commands);
+	holder->errorHolder = createErrorHolder();
+	
+	return holder;
 }
 
 void freeInstructions(InstructionsHolder* holder) {
@@ -143,14 +148,14 @@ void freeInstructionsList(NodesList* instructions) {
 }
 
 void addRegisters(NodesList* registers) {
-	addRegister(registers, REGISTER0, REGISTER0_VALUE);
-	addRegister(registers, REGISTER1, REGISTER1_VALUE);
-	addRegister(registers, REGISTER2, REGISTER2_VALUE);
-	addRegister(registers, REGISTER3, REGISTER3_VALUE);
-	addRegister(registers, REGISTER4, REGISTER4_VALUE);
-	addRegister(registers, REGISTER5, REGISTER5_VALUE);
-	addRegister(registers, REGISTER6, REGISTER6_VALUE);
-	addRegister(registers, REGISTER7, REGISTER7_VALUE);
+	addRegister(registers, REG0, REG0_VALUE);
+	addRegister(registers, REG1, REG1_VALUE);
+	addRegister(registers, REG2, REG2_VALUE);
+	addRegister(registers, REG3, REG3_VALUE);
+	addRegister(registers, REG4, REG4_VALUE);
+	addRegister(registers, REG5, REG5_VALUE);
+	addRegister(registers, REG6, REG6_VALUE);
+	addRegister(registers, REG7, REG7_VALUE);
 }
 
 void addRegister(NodesList* registers, char* registerName, int registerValue)
