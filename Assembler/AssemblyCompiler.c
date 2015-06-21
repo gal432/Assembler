@@ -2,7 +2,7 @@
 
 void compileAssembly(char* name, NodesList* lines) {
 	InformationHolder* holder = createInformationHolder();
-	handleFirstRun(holder, lines);
+	FirstRun(holder, lines);
 	checkSymbolsUsedInArguments(holder);
 	
 	addInstructionsCounterToDataCounter(holder->data->symbols, holder->instructions->counter);
@@ -11,7 +11,7 @@ void compileAssembly(char* name, NodesList* lines) {
 	if (holder->errorHolder->hasError || holder->instructions->errorHolder->hasError || holder->data->errorHolder->hasError)
 		printErrors(name, holder);
 	else
-		handleSecondRun(name, holder, lines);
+		SecondRun(name, holder, lines);
 	
 	freeInformationHolder(holder);
 }
@@ -58,21 +58,25 @@ void setEntriesValues(InformationHolder* holder)
 	}
 }
 
-void handleFirstRun(InformationHolder* holder, NodesList* lines) {
+void FirstRun(InformationHolder* holder, NodesList* lines) {
 	Node* node;
 	AssemblyLine* assemblyLine;
 	while ((node = getNext(lines))) {
 		assemblyLine = (AssemblyLine*)(node->value);
+
+		/* comment or space doesn't need to handle */
 		if (isStringEmpty(assemblyLine->line) || assemblyLine->line[0] == COMMENT_LINE_START)
-			continue; /* Empty line or comment line */
+			continue; 
+		
 		if (assemblyLine->line[0] == GUIDELINE_LINE_START)
 			handleGuideline(holder->data, assemblyLine);
+		
 		else
 			handleInstruction(holder->instructions, assemblyLine);
 	}
 }
 
-void handleSecondRun(char* name, InformationHolder* holder, NodesList* lines) {
+void SecondRun(char* name, InformationHolder* holder, NodesList* lines) {
 	NodesList* words = translateInforamtion(holder->instructions, holder->data, holder->data->symbols, holder->data->externSymbols);
 	createObjectFile(name, words, holder->instructions->counter, holder->data->counter);
 	createEntriesFile(name, holder->data->enterySymbols);

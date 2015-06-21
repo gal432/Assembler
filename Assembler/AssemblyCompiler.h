@@ -14,8 +14,8 @@
 #define GUIDELINE_LINE_START '.'
 
 void compileAssembly(char* name, NodesList* lines);
-void handleFirstRun(InformationHolder* holder, NodesList*);
-void handleSecondRun(char* name, InformationHolder* holder, NodesList*);
+void FirstRun(InformationHolder* holder, NodesList*);
+void SecondRun(char* name, InformationHolder* holder, NodesList*);
 
 /* Checks if the symbols that were used in the arguments exist */
 void checkSymbolsUsedInArguments(InformationHolder* holder);
