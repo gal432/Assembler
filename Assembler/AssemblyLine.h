@@ -7,4 +7,8 @@ typedef struct _assemblyLine {
 	char* line;
 	int lineNumber;
 } AssemblyLine;
+
+AssemblyLine* createAssemblyLine(char* line, int lineNumber);
+
+
 #endif

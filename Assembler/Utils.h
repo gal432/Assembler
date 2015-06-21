@@ -5,5 +5,5 @@
 
 void* safeMalloc(size_t size);
 int getValueAsInt(void* value);
-
+char* getLabel(char** linePtr);
 #endif

@@ -14,3 +14,8 @@ int getValueAsInt(void* value)
 	return *((int*)value);
 }
 
+char* getLabel(char** linePtr) {
+	const char labelDelimiter = ':';
+	return seperateString(linePtr, labelDelimiter);
+}
+
