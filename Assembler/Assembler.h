@@ -1,5 +1,6 @@
 #include "General.h"
 #include "NodesList.h"
+#include "AssemblyLine.h"
 
 /* Reads the lines from the file */
 int readLines(char* fileName, AssemblyLine* lines);

@@ -69,7 +69,6 @@
     <ClCompile Include="AssemblyCompiler.c" />
     <ClCompile Include="Commands.c" />
     <ClCompile Include="ErrorHandler.c" />
-    <ClCompile Include="General.c" />
     <ClCompile Include="GuidelineHandler.c" />
     <ClCompile Include="InformationHolder.c" />
     <ClCompile Include="InformationTranslator.c" />
@@ -77,6 +76,7 @@
     <ClCompile Include="NodesList.c" />
     <ClCompile Include="OutputCreator.c" />
     <ClCompile Include="StringFuncs.c" />
+    <ClCompile Include="Utils.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assembler.h" />
@@ -91,6 +91,7 @@
     <ClInclude Include="NodesList.h" />
     <ClInclude Include="OutputCreator.h" />
     <ClInclude Include="StringFuncs.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ps.as" />
