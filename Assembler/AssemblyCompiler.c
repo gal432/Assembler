@@ -18,19 +18,21 @@ void compileAssembly(char* name, NodesList* lines) {
 
 void checkSymbolsUsedInArguments(InformationHolder* holder) {
 	Node* symbolNode;
-	int* lineNumber;
+	int* lineNum;
 	while ((symbolNode = getNext(holder->instructions->symbolsUsedInArguments))) {
 		if (searchNode(holder->data->symbols, symbolNode->name) || searchNode(holder->data->externSymbols, symbolNode->name) || searchNode(holder->instructions->symbols, symbolNode->name))
 			continue;
-		lineNumber = (int*)(symbolNode->value);
-		addError(holder->errorHolder, "The label that was used in the arguments was invalid", *lineNumber);
+		
+		lineNum = (int*)(symbolNode->value);
+		addError(holder->errorHolder, "The label that was used in the arguments was invalid", *lineNum);
 	}
 }
 
 void addInstructionsCounterToDataCounter(NodesList* dataSymbols, int counterToAdd)
 {
 	Node* symbol;
-	while ((symbol = getNext(dataSymbols)))
+
+	for (symbol = getNext(dataSymbols); symbol != NULL ; symbol = getNext(dataSymbols))
 	{
 		int* address = (int*)symbol->value;
 		*address += counterToAdd;
@@ -41,6 +43,7 @@ void setEntriesValues(InformationHolder* holder)
 {
 	Node* entryNode;
 	Node* symbol;
+	
 	while ((entryNode = getNext(holder->data->enterySymbols)))
 	{
 		if ((symbol = searchNode(holder->instructions->symbols, entryNode->name)))
@@ -78,9 +81,11 @@ void FirstRun(InformationHolder* holder, NodesList* lines) {
 
 void SecondRun(char* name, InformationHolder* holder, NodesList* lines) {
 	NodesList* words = translateInforamtion(holder->instructions, holder->data, holder->data->symbols, holder->data->externSymbols);
+	
 	createObjectFile(name, words, holder->instructions->counter, holder->data->counter);
 	createEntriesFile(name, holder->data->enterySymbols);
 	createExtrenalsFile(name, holder->data->externSymbols);
+	
 	freeNodesList(words);
 }
 
