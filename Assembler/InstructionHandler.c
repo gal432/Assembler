@@ -1,4 +1,4 @@
-#include "StringFuncs.h"
+#include "InstructionHandler.h"
 
 void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 	int instructionLength;
@@ -6,9 +6,11 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 	int source;
 	int zeroArguments;
 	char* commandName;
+	
 	Node* node;
 	NodesList* arguments;
 	Command* command;
+	
 	zeroArguments = FALSE;
 	source = 0;
 	destination = 0;
@@ -16,8 +18,10 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 
 	addInstructionSymbol(holder, assemblyLine);
 	commandName = getCommandName(&(assemblyLine->line));
+	
+	/* Command without arguments */
 	if (!commandName) {
-		commandName = assemblyLine->line; /* It's probably a command without arguments */
+		commandName = assemblyLine->line; 
 		zeroArguments = TRUE;
 	}
 	node = searchNode(holder->commands, commandName);	
@@ -29,8 +33,9 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 
 	arguments = createNodesList(sizeof(int));
 	command = (Command*)node->value;
+	
 	if (!zeroArguments)
-		extract_command_params(arguments, assemblyLine, holder);
+		extractCommandParams(arguments, assemblyLine, holder);
 
 	if (arguments->length != command->numberOfArguments) {
 		addError(holder->errorHolder, "Number of command arguments was wrong", assemblyLine->lineNumber);
@@ -59,11 +64,11 @@ Instruction* createInstruction(Command* command, NodesList* arguments) {
 	return instruction;
 }
 
-NodesList* extract_command_params(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder) {
+NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder) {
 	const char* delimiters = ",";
 	char* token;
 	char* argument;
-	int addressingType;
+	int addressingType;	
 
 	/* walk through the tokens */
 	for (token = strtok(assemblyLine->line, delimiters); token != NULL; token = strtok(NULL, delimiters))
@@ -83,10 +88,13 @@ NodesList* extract_command_params(NodesList* arguments, AssemblyLine* assemblyLi
 int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHolder* holder) {
 	if (argument[0] == IMMEDIATE_ADDRESSING_START)
 		return IMMEDIATE_ADDRESSING_VALUE;
+	
 	else if (argument[0] == DISTANCE_ADDRESSING_START)
 		return DISTANCE_ADDRESSING_VALUE;
+	
 	else if (searchNode(holder->registers, argument))
 		return DIRECT_REGISTER_ADDRESSING_VALUE;
+	
 	else {
 		addNode(holder->symbolsUsedInArguments, argument, &(assemblyLine->lineNumber));
 		return DIRECT_ADDRESSING_VALUE;
@@ -97,6 +105,7 @@ void addInstructionSymbol(InstructionsHolder* holder, AssemblyLine* assemblyLine
 	if (assemblyLine->labelName) {
 		if (searchNode(holder->symbols, assemblyLine->labelName))
 			addError(holder->errorHolder, "This label was already declared", assemblyLine->lineNumber);
+		
 		else
 			addNode(holder->symbols, assemblyLine->labelName, &holder->counter);
 	}
@@ -104,8 +113,7 @@ void addInstructionSymbol(InstructionsHolder* holder, AssemblyLine* assemblyLine
 
 char* getCommandName(char** linePtr) {
 	const char commandDelimiter = ' ';
-	char* commandName = seperateString(linePtr, commandDelimiter);
-	return commandName;
+	return seperateString(linePtr, commandDelimiter);
 }
 
 InstructionsHolder* CreateInstructions() {

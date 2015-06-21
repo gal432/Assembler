@@ -6,6 +6,8 @@
 #include "Commands.h"
 #include "ErrorHandler.h"
 #include "AssemblyLine.h"
+#include "StringFuncs.h"
+
 
 #define REG0 "r0"
 #define REG0_VALUE 0
@@ -61,7 +63,7 @@ void freeInstructions(InstructionsHolder* holder);
 void freeInstructionsList(NodesList* instructions);
 
 void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine);
-NodesList* extract_command_params(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder);
+NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder);
 int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHolder* holder);
 char* getCommandName(char** linePtr);
 void addInstructionSymbol(InstructionsHolder* holder, AssemblyLine* assemblyLine);
