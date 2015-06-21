@@ -2,7 +2,7 @@
 #include "NodesList.h"
 
 /* Reads the lines from the file */
-NodesList* readLines(char* fileName);
+int readLines(char* fileName, AssemblyLine* lines);
 
 AssemblyLine* createAssemblyLine(char* line, int lineNumber);
 

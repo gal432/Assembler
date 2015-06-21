@@ -9,52 +9,50 @@
 
 int main(int argc, char* argv[])
 {
+	AssemblyLine lines[50];
+
 	if (1 == DEBUG)
 	{
 		char* fileName;
 		int i;
 		char assemblyFileName[FILE_NAME_SIZE];
-		NodesList* lines = NULL;
 		
 		fileName = "C:\\Temp\\ps.as";
 		//sprintf(assemblyFileName, "%s.as", fileName);
 		
-		lines = readLines(fileName);
-		compileAssembly(fileName, lines);
-		freeLinesString(lines);
-		freeNodesList(lines);
-		
-
+		int numOfLines = readLines(fileName, &lines);
+		compileAssembly(fileName, &lines);
+		//freeLinesString(lines);
+		//freeNodesList(lines);
 		return 0;
 	}
 
-
+	/*
 	char* fileName;
 	int i;
 	char assemblyFileName[FILE_NAME_SIZE];
-	NodesList* lines = NULL;
+	
 	for (i = 1; i < argc; i++) {
 		fileName = argv[i];
 		sprintf(assemblyFileName, "%s.as", fileName);
-		lines = readLines(assemblyFileName);
+		int linesNumber = readLines(assemblyFileName, lines);
 		compileAssembly(fileName, lines);
 		freeLinesString(lines);
 		freeNodesList(lines);
-	}
+	}*/
 	return 0;
 }
 
-NodesList* readLines(char* fileName) {
+int readLines(char* fileName, AssemblyLine* lines) {
 	char currentLine[MAX_LINE_LEN];
 	AssemblyLine* assemblyLine;
 	int lineNumber = 0;
-	NodesList* linesList = createNodesList(sizeof(AssemblyLine));
 
 	FILE* file = fopen(fileName, "r");
 
 	if (file == NULL)
 	{
-		printf("Error: Couldn't open the file %s\n", fileName);
+		printf("Error: cant open file %s\n", fileName);
 		exit(0);
 	}
 
@@ -63,12 +61,14 @@ NodesList* readLines(char* fileName) {
 		assemblyLine->line = trim(assemblyLine->line);
 		assemblyLine->labelName = getLabel(&(assemblyLine->line));
 		assemblyLine->line = trim(assemblyLine->line); /* After getting the label name, we need to trim again */
-		addNode(linesList, NULL, assemblyLine);
+		
+		lines[lineNumber - 1] = (*assemblyLine);
+		//addNode(linesList, NULL, assemblyLine);
 		free(assemblyLine); /* when we add the node, we copy the bits to a new memory block, so we can free this line */
 	}
 	fclose(file);
 
-	return linesList;
+	return lineNumber -1;
 }
 
 AssemblyLine* createAssemblyLine(char* line, int lineNumber) {
@@ -84,11 +84,4 @@ AssemblyLine* createAssemblyLine(char* line, int lineNumber) {
 char* getLabel(char** linePtr) {
 	const char labelDelimiter = ':';
 	return seperateString(linePtr, labelDelimiter);
-}
-
-void freeLinesString(NodesList* lines) {
-	Node* node;
-	while ((node = getNext(lines))) {
-		free(((AssemblyLine*)(node->value))->originalLinePtr);
-	}
 }
