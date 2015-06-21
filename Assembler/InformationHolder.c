@@ -2,9 +2,11 @@
 
 InformationHolder* createInformationHolder() {
 	InformationHolder* holder = (InformationHolder*)safeMalloc(sizeof(InformationHolder));
+	
 	holder->data = CreateGuidelineHolder();
 	holder->instructions = CreateInstructions();
 	holder->errorHolder = createErrorHolder();
+	
 	return holder;
 }
 
