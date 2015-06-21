@@ -51,7 +51,7 @@
     <ClCompile Include="GuidelineHandler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="General.c">
+    <ClCompile Include="Utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -90,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AssemblyCompiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
