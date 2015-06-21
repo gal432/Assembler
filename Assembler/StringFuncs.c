@@ -23,9 +23,12 @@ char* trim(char *str)
 char* seperateString(char** str, char delimiter) {
 	char* innerString = *str;
 	char *delimiterPtr = strchr(*str, delimiter);
+	
 	if (delimiterPtr) {
 		int delimiterIndex = delimiterPtr - *str;
-		*(innerString + delimiterIndex) = 0; /* Make the delimiter as the end of the inner string */
+		
+		/* delimiter end of the inner string */
+		*(innerString + delimiterIndex) = 0; 
 		*str += delimiterIndex + 1;
 		return innerString;
 	}
