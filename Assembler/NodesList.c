@@ -39,10 +39,10 @@ Node* createNode(char* name, void* value, int elementSize) {
 	if (NULL != value) {
 		node->value = safeMalloc(elementSize);
 		memcpy(node->value, value, elementSize);
-		node->hasValue = TRUE;
 	}
 	else
-		node->hasValue = FALSE;
+		node->value = NULL;
+	
 	node->next = NULL;
 	return node;
 }
@@ -62,8 +62,10 @@ void freeNodesList(NodesList* nodesList) {
 	{
 		tempNode = currentNode;
 		currentNode = currentNode->next;
-		if (tempNode->hasValue)
+		
+		if (NULL != tempNode->value)
 			free(tempNode->value);
+
 		free(tempNode);
 	}
 	free(nodesList);

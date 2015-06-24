@@ -15,7 +15,6 @@ typedef struct _node
 	char* name;
 	void* value;
 	struct _node* next;
-	bool hasValue;
 } Node;
 
 typedef struct _NodesList
