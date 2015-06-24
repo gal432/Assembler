@@ -19,8 +19,14 @@ void compileAssembly(char* name, NodesList* lines) {
 void checkSymbolsUsedInArguments(InformationHolder* holder) {
 	Node* symbolNode;
 	int* lineNum;
-	while ((symbolNode = getNext(holder->instructions->symbolsUsedInArguments))) {
-		if (searchNode(holder->data->symbols, symbolNode->name) || searchNode(holder->data->externSymbols, symbolNode->name) || searchNode(holder->instructions->symbols, symbolNode->name))
+	while ((symbolNode = getNext(holder->instructions->symbolsUsedInArguments)))
+	{
+		/* Find if the symbol exist*/
+		Node* holderSymbol = searchNode(holder->data->symbols, symbolNode->name);
+		Node* externSymbol = searchNode(holder->data->externSymbols, symbolNode->name);
+		Node* insturctionsSymbol = searchNode(holder->instructions->symbols, symbolNode->name);
+		
+		if (holderSymbol || externSymbol || insturctionsSymbol)
 			continue;
 		
 		lineNum = (int*)(symbolNode->value);
