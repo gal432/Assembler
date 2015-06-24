@@ -3,8 +3,10 @@
 NodesList* translateInforamtion(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols) {
 	NodesList* words = createNodesList(sizeof(WordHolder));
 	int wordAddress = MEMORY_ADDRESS_START;
+	
 	translateInstructions(&wordAddress, words, instructionsHolder, dataSymbols, externSymbols);
 	translateData(&wordAddress, words, guidelineHolder, instructionsHolder->counter);
+	
 	return words;
 }
 
@@ -13,6 +15,7 @@ void translateInstructions(int* wordAddress, NodesList* words, InstructionsHolde
 	Node* instructionNode;
 	Instruction* instruction;
 	int instructionAddress;
+	
 	while ((instructionNode = (getNext(holder->instructions))))
 	{
 		instruction = (Instruction*)(instructionNode->value);
@@ -43,6 +46,7 @@ void addFirstWord(int* wordAddress, NodesList* words, Instruction* instruction)
 	FirstWord* firstWord;
 	WordHolder* wordHolder;
 	int destination = 0, source = 0;
+	
 	if (instruction->arguments->length >= 1) {
 		destination = *((int*)(instruction->arguments->tail->value));
 	}
@@ -52,7 +56,9 @@ void addFirstWord(int* wordAddress, NodesList* words, Instruction* instruction)
 	}
 	firstWord = createFirstWord(destination, source, instruction->command->code, instruction->arguments->length);
 	wordHolder = createWordHolder(*wordAddress, (int*)firstWord);
+	
 	(*wordAddress)++;
+	
 	addNode(words, NULL, wordHolder);
 	free(wordHolder);
 	free(firstWord);
