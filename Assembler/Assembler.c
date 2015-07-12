@@ -3,6 +3,7 @@
 #define DEBUG 1
 int main(int argc, char* argv[])
 {
+	/*
 	if (1 == DEBUG)
 	{
 		char* fileName;
@@ -19,8 +20,8 @@ int main(int argc, char* argv[])
 		freeNodesList(lines);
 		return 0;
 	}
-
-	/*
+	*/
+	
 	char* fileName;
 	int i;
 	char assemblyFileName[FILE_NAME_SIZE];
@@ -28,12 +29,11 @@ int main(int argc, char* argv[])
 	for (i = 1; i < argc; i++) {
 		fileName = argv[i];
 		sprintf(assemblyFileName, "%s.as", fileName);
-		lines = readLines(assemblyFileName);
+		lines = readLinesToAssemblyList(assemblyFileName);
 		compileAssembly(fileName, lines);
 		freeLinesString(lines);
 		freeNodesList(lines);
-	}
-	return 0;*/
+	}	return 0;
 }
 
 NodesList* readLinesToAssemblyList(char* fileName) {
