@@ -46,7 +46,7 @@ NodesList* readLinesToAssemblyList(char* fileName) {
 
 	if (NULL == file)
 	{
-		printf("Error: Couldn't open the file %s\n", fileName);
+		printf("Error - Couldnt open the file %s\n", fileName);
 		exit(0);
 	}
 
@@ -60,7 +60,8 @@ NodesList* readLinesToAssemblyList(char* fileName) {
 		assemblyLine->line = trim(assemblyLine->line);
 		addNode(linesList, NULL, assemblyLine);
 		
-		free(assemblyLine); /* when we add the node, we copy the bits to a new memory block, so we can free this line */
+		/* copy the bits to a new memory block, so we can free this line */
+		free(assemblyLine); 
 	}
 	fclose(file);
 

@@ -109,5 +109,5 @@ void printErrors(char* name, InformationHolder* holder) {
 
 void PrintError(Node* errorNode) {
 	ErrorMessage* errorMessage = (ErrorMessage*)(errorNode->value);
-	printf("Line number %d: %s\n", errorMessage->lineNumber, errorMessage->message);
+	printf("Line number %d - %s\n", errorMessage->lineNumber, errorMessage->message);
 }
