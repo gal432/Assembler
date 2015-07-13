@@ -1,6 +1,11 @@
 #ifndef ASSEMBLY_LINE_H
 #define ASSEMBLY_LINE_H
 
+#include "Utils.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct _assemblyLine {
 	char* originalLinePtr;
 	char* labelName;
