@@ -1,7 +1,9 @@
 #ifndef GENERAL_H
 #define GENERAL_H
 
-#include "Utils.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "StringFuncs.h"
 
 #define MEMORY_ADDRESS_START 100
 #define MAX_LINE_LEN 80
@@ -23,4 +25,9 @@
 #define ALL_BITS_SIZE (ENCODING_BITS_SIZE+DESTINATION_BITS_SIZE+SOURCE_BITS_SIZE+OPCODE_BITS_SIZE+GROUP_BITS_SIZE)
 
 typedef enum { FALSE, TRUE } bool;
+
+void* safeMalloc(size_t size);
+int getValueAsInt(void* value);
+char* getLabel(char** linePtr);
+
 #endif
