@@ -1,10 +1,9 @@
 #ifndef GENERAL_H
-#include "Utils.h"
-
 #define GENERAL_H
 
-#define MEMORY_ADDRESS_START 100
+#include "Utils.h"
 
+#define MEMORY_ADDRESS_START 100
 #define MAX_LINE_LEN 80
 #define FILE_NAME_SIZE 25
 

@@ -4,8 +4,9 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "InstructionHandler.h"
 #include "General.h"
+#include "InstructionHandler.h"
+
 
 /* Removes the white spaces in a string */
 char* trim(char *str);
