@@ -6,7 +6,6 @@
 #include "Commands.h"
 #include "ErrorHandler.h"
 #include "AssemblyLine.h"
-#include "StringFuncs.h"
 
 
 #define REG0 "r0"

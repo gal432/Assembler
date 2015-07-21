@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "General.h"
+
 typedef struct _assemblyLine {
 	char* originalLinePtr;
 	char* labelName;

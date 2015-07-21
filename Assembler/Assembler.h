@@ -8,7 +8,6 @@
 #include "General.h"
 #include "NodesList.h"
 #include "AssemblyCompiler.h"
-#include "StringFuncs.h"
 #include "AssemblyLine.h"
 
 /* Reads the lines from the file */

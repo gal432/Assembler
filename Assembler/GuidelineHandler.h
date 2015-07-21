@@ -9,7 +9,6 @@
 #include "ErrorHandler.h"
 #include "Word.h"
 #include "AssemblyLine.h"
-#include "StringFuncs.h"
 
 #define DATA_SIZE 1000
 

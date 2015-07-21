@@ -9,7 +9,6 @@
 #include "InstructionHandler.h"
 #include "GuidelineHandler.h"
 #include "Word.h"
-#include "StringFuncs.h"
 
 NodesList* translateInforamtion(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols);
 

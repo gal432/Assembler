@@ -3,7 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "StringFuncs.h"
+#include <string.h>
+#include <ctype.h>
 
 #define MEMORY_ADDRESS_START 100
 #define MAX_LINE_LEN 80
@@ -29,5 +30,16 @@ typedef enum { FALSE, TRUE } bool;
 void* safeMalloc(size_t size);
 int getValueAsInt(void* value);
 char* getLabel(char** linePtr);
+
+
+/* Removes the white spaces in a string */
+char* trim(char *str);
+
+/* Seperates the string with first appearance of the delimiter */
+char* seperateString(char** str, char delimiter);
+
+bool startsWith(char* source, char* find);
+
+bool isStringEmpty(char* str);
 
 #endif

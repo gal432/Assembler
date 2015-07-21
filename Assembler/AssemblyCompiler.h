@@ -6,7 +6,6 @@
 #include "InformationHolder.h"
 #include "General.h"
 #include "NodesList.h"
-#include "StringFuncs.h"
 #include "InformationTranslator.h"
 #include "OutputCreator.h"
 
