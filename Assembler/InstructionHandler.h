@@ -55,6 +55,7 @@ typedef struct
 	ErrorHolder* errorHolder;
 } InstructionsHolder;
 
+Node* searchCommand(NodesList* commands, char* name);
 
 InstructionsHolder* CreateInstructions();
 Instruction* createInstruction(Command* command, NodesList* arguments);
@@ -63,6 +64,7 @@ void freeInstructionsList(NodesList* instructions);
 
 void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine);
 NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder);
+int extractCommandReturnTimes(AssemblyLine* assemblyLine);
 int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHolder* holder);
 char* getCommandName(char** linePtr);
 void addInstructionSymbol(InstructionsHolder* holder, AssemblyLine* assemblyLine);

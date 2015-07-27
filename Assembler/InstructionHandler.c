@@ -24,16 +24,17 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 		commandName = assemblyLine->line; 
 		zeroArguments = TRUE;
 	}
-	node = searchNode(holder->commands, commandName);	
+	node = searchCommand(holder->commands, commandName);
 
 	if (NULL == node) {
 		addError(holder->errorHolder, "Command name is invalid", assemblyLine->lineNumber);
 		return;
 	}
-
 	arguments = createNodesList(sizeof(int));
 	command = (Command*)node->value;
 	
+	assemblyLine->returnTimes = extractCommandReturnTimes(assemblyLine);
+
 	if (!zeroArguments)
 		extractCommandParams(arguments, assemblyLine, holder);
 
@@ -55,6 +56,21 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 	}
 	addNode(holder->instructions, NULL, createInstruction(command, arguments));
 	holder->counter += instructionLength;
+}
+
+Node* searchCommand(NodesList* commands, char* name)
+{
+	
+	Node* currentNode = commands->head;
+
+	while (currentNode)
+	{
+		char* retunedCode = strstr(name, currentNode->name);
+		if (retunedCode == name)
+			return currentNode;
+		currentNode = currentNode->next;
+	}
+	return NULL;
 }
 
 Instruction* createInstruction(Command* command, NodesList* arguments) {
@@ -85,6 +101,11 @@ NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine
 	return arguments;
 }
 
+int extractCommandReturnTimes(AssemblyLine* assemblyLine)
+{
+	//TODO: finish
+	return 2;
+}
 int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHolder* holder) {
 	if (argument[0] == IMMEDIATE_ADDRESSING_START)
 		return IMMEDIATE_ADDRESSING_VALUE;
