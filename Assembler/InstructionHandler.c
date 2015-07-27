@@ -5,7 +5,9 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 	int destination;
 	int source;
 	int zeroArguments;
+	int returnTimes;
 	char* commandName;
+	char* orginalLine;
 	
 	Node* node;
 	NodesList* arguments;
@@ -17,6 +19,8 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 	instructionLength = 1;
 
 	addInstructionSymbol(holder, assemblyLine);
+	orginalLine = assemblyLine->line;
+	
 	commandName = getCommandName(&(assemblyLine->line));
 	
 	/* Command without arguments */
@@ -33,7 +37,13 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 	arguments = createNodesList(sizeof(int));
 	command = (Command*)node->value;
 	
-	assemblyLine->returnTimes = extractCommandReturnTimes(assemblyLine);
+	returnTimes = extractCommandReturnTimes(orginalLine);
+	if (1 != returnTimes && 2 != returnTimes)
+	{
+		addError(holder->errorHolder, "number of commands is invalid", assemblyLine->lineNumber);
+		return;
+	}
+	command->numOfReturnTimes = returnTimes;
 
 	if (!zeroArguments)
 		extractCommandParams(arguments, assemblyLine, holder);
@@ -65,8 +75,7 @@ Node* searchCommand(NodesList* commands, char* name)
 
 	while (currentNode)
 	{
-		char* retunedCode = strstr(name, currentNode->name);
-		if (retunedCode == name)
+		if (startsWith(name, currentNode->name))
 			return currentNode;
 		currentNode = currentNode->next;
 	}
@@ -101,10 +110,23 @@ NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine
 	return arguments;
 }
 
-int extractCommandReturnTimes(AssemblyLine* assemblyLine)
+int extractCommandReturnTimes(char* assemblyLine)
 {
-	//TODO: finish
-	return 2;
+	int length;
+	int i;
+
+	
+	length = strlen(assemblyLine);
+
+	for (i = 0; i < length; i++)
+	{
+		if (isdigit(assemblyLine[i]))
+		{
+			return assemblyLine[i] - '0';
+		}
+	}
+
+	return NULL;
 }
 int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHolder* holder) {
 	if (argument[0] == IMMEDIATE_ADDRESSING_START)

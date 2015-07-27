@@ -11,7 +11,7 @@ typedef struct _assemblyLine {
 	char* originalLinePtr;
 	char* labelName;
 	char* line;
-	int lineNumber;
+	int lineNumber;	
 } AssemblyLine;
 
 AssemblyLine* createAssemblyLine(char* line, int lineNumber);
