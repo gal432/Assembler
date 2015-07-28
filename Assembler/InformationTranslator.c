@@ -14,14 +14,19 @@ void translateInstructions(int* wordAddress, NodesList* words, InstructionsHolde
 {
 	Node* instructionNode;
 	Instruction* instruction;
+	int i;
 	int instructionAddress;
 	
 	while ((instructionNode = (getNext(holder->instructions))))
 	{
 		instruction = (Instruction*)(instructionNode->value);
-		instructionAddress = *wordAddress;
-		addFirstWord(wordAddress, words, instruction);
-		addArgumentsWords(instructionAddress, wordAddress, words, instruction->arguments, holder->symbols, dataSymbols, externSymbols, holder->registers);
+
+		for (i = 0; i < instruction->command->numOfReturnTimes; i++)
+		{
+			instructionAddress = *wordAddress;
+			addFirstWord(wordAddress, words, instruction);
+			addArgumentsWords(instructionAddress, wordAddress, words, instruction->arguments, holder->symbols, dataSymbols, externSymbols, holder->registers);
+		}
 	}
 }
 
@@ -173,9 +178,13 @@ ArgumentWord* argumentToWord(int instructionAddress, int wordAddress, Node* argu
 
 void translateDistanceToArgument(char* argument, char** label1, char** label2)
 {
-	argument += 2; /* Skip the first char that represents that it's an DISTANCE_ADDRESSING_VALUE and the second char('(') */
-	*(argument + strlen(argument) - 1) = '\0'; /* Cut the last char (')') */
-	*label1 = strtok(argument, ",");
+	char* arg = (char*)safeMalloc(sizeof(argument));
+	
+	strcpy(arg, argument);
+
+	arg += 2; /* Skip the first char that represents that it's an DISTANCE_ADDRESSING_VALUE and the second char('(') */
+	*(arg + strlen(arg) - 1) = '\0'; /* Cut the last char (')') */
+	*label1 = strtok(arg, ",");
 	*label2 = strtok(NULL, ",");
 	*label1 = trim(*label1);
 	*label2 = trim(*label2);
