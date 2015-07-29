@@ -68,6 +68,8 @@ void setEntriesValues(InformationHolder* holder)
 }
 
 void FirstRun(InformationHolder* holder, NodesList* lines) {
+	char* lastArgument = NULL;
+
 	Node* node;
 	AssemblyLine* assemblyLine;
 	while ((node = getNext(lines))) {
@@ -78,10 +80,12 @@ void FirstRun(InformationHolder* holder, NodesList* lines) {
 			continue; 
 		
 		if (assemblyLine->line[0] == GUIDELINE_LINE_START)
+		{
 			handleGuideline(holder->data, assemblyLine);
-		
+			lastArgument = NULL;
+		}
 		else
-			handleInstruction(holder->instructions, assemblyLine);
+			handleInstruction(holder->instructions, assemblyLine, &lastArgument);
 	}
 }
 

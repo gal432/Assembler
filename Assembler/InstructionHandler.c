@@ -1,6 +1,6 @@
 #include "InstructionHandler.h"
 
-void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
+void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, char** lastArgument) {
 	int instructionLength;
 	int destination;
 	int source;
@@ -46,7 +46,7 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine) {
 	command->numOfReturnTimes = returnTimes;
 
 	if (!zeroArguments)
-		extractCommandParams(arguments, assemblyLine, holder);
+		extractCommandParams(arguments, assemblyLine, holder, &lastArgument);
 
 	if (arguments->length != command->numberOfArguments) {
 		addError(holder->errorHolder, "Number of command arguments was wrong", assemblyLine->lineNumber);
@@ -132,8 +132,8 @@ int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHo
 	if (argument[0] == IMMEDIATE_ADDRESSING_START)
 		return IMMEDIATE_ADDRESSING_VALUE;
 	
-	else if (argument[0] == DISTANCE_ADDRESSING_START)
-		return DISTANCE_ADDRESSING_VALUE;
+	else if (argument[0] == LAST_ADDRESSING_START)
+		return LAST_ADDRESSING_VALUE;
 	
 	else if (searchNode(holder->registers, argument))
 		return DIRECT_REGISTER_ADDRESSING_VALUE;

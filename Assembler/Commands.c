@@ -4,7 +4,7 @@ bool checkMovArgs(NodesList* arguments) {
 	int sourceArgument = *((int*)(arguments->head->value));
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || DISTANCE_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
+		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || LAST_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
 		&&
 		(DIRECT_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
@@ -13,16 +13,16 @@ bool checkCmpArgs(NodesList* arguments) {
 	int sourceArgument = *((int*)(arguments->head->value));
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || DISTANCE_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
+		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || LAST_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
 		&&
-		(IMMEDIATE_ADDRESSING_VALUE == destinationArgument || DIRECT_ADDRESSING_VALUE == destinationArgument || DISTANCE_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
+		(IMMEDIATE_ADDRESSING_VALUE == destinationArgument || DIRECT_ADDRESSING_VALUE == destinationArgument || LAST_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
 
 bool checkAddArgs(NodesList* arguments) {
 	int sourceArgument = *((int*)(arguments->head->value));
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || DISTANCE_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
+		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || LAST_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
 		&&
 		(DIRECT_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
@@ -31,7 +31,7 @@ bool checkSubArgs(NodesList* arguments) {
 	int sourceArgument = *((int*)(arguments->head->value));
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || DISTANCE_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
+		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || LAST_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
 		&&
 		(DIRECT_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
@@ -72,25 +72,25 @@ bool checkDecArgs(NodesList* arguments) {
 bool checkJmpArgs(NodesList* arguments) {
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(DIRECT_ADDRESSING_VALUE == destinationArgument || DISTANCE_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
+		(DIRECT_ADDRESSING_VALUE == destinationArgument || LAST_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
 
 bool checkBneArgs(NodesList* arguments) {
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(DIRECT_ADDRESSING_VALUE == destinationArgument || DISTANCE_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
+		(DIRECT_ADDRESSING_VALUE == destinationArgument || LAST_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
 
 bool checkRedArgs(NodesList* arguments) {
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(DIRECT_ADDRESSING_VALUE == destinationArgument || DISTANCE_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
+		(DIRECT_ADDRESSING_VALUE == destinationArgument || LAST_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
 
 bool checkPrnArgs(NodesList* arguments) {
 	int destinationArgument = *((int*)(arguments->tail->value));
 	return
-		(IMMEDIATE_ADDRESSING_VALUE == destinationArgument || DIRECT_ADDRESSING_VALUE == destinationArgument || DISTANCE_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
+		(IMMEDIATE_ADDRESSING_VALUE == destinationArgument || DIRECT_ADDRESSING_VALUE == destinationArgument || LAST_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
 
 bool checkJsrArgs(NodesList* arguments) {

@@ -63,8 +63,8 @@ Instruction* createInstruction(Command* command, NodesList* arguments);
 void freeInstructions(InstructionsHolder* holder);
 void freeInstructionsList(NodesList* instructions);
 
-void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine);
-NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder);
+void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, char** lastArgument);
+NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder, char** lastArgument);
 int extractCommandReturnTimes(char* assemblyLine);
 int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHolder* holder);
 char* getCommandName(char** linePtr);
