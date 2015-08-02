@@ -17,6 +17,7 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	source = 0;
 	destination = 0;
 	instructionLength = 1;
+	bool errors = FALSE;
 
 	addInstructionSymbol(holder, assemblyLine);
 	orginalLine = assemblyLine->line;
@@ -46,18 +47,38 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	command->numOfReturnTimes = returnTimes;
 
 	if (!zeroArguments)
-		extractCommandParams(arguments, assemblyLine, holder, &lastArgument);
-
+	{
+		errors = extractCommandParams(arguments, assemblyLine, holder, lastArgument);
+		if (TRUE == errors)
+		{
+			*lastArgument = NULL;
+			return;
+		}
+	}
+		
 	if (arguments->length != command->numberOfArguments) {
 		addError(holder->errorHolder, "Number of command arguments was wrong", assemblyLine->lineNumber);
+		*lastArgument = NULL;
 		return;
 	}
 
 	if (!command->correctArgumentsTypes(arguments)) {
 		addError(holder->errorHolder, "Wrong type of arguments", assemblyLine->lineNumber);
+		*lastArgument = NULL;
 		return;
 	}
+	
+	if (arguments->length == 1 || arguments->length == 2)
+	{
+		*lastArgument = arguments->head->name;
+	}
+	else
+	{
+		*lastArgument = NULL;
+	}
+
 	instructionLength += arguments->length;
+	
 	if (arguments->length == 2) {
 		destination = getValueAsInt(arguments->tail->value);
 		source = getValueAsInt(arguments->head->value);
@@ -89,25 +110,35 @@ Instruction* createInstruction(Command* command, NodesList* arguments) {
 	return instruction;
 }
 
-NodesList* extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder) {
+bool extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, InstructionsHolder* holder, char** lastArgument) {
 	const char* delimiters = ",";
 	char* token;
 	char* argument;
-	int addressingType;	
+	int addressingType;
+	bool firstArgument = TRUE;
 
 	/* walk through the tokens */
 	for (token = strtok(assemblyLine->line, delimiters); token != NULL; token = strtok(NULL, delimiters))
 	{
 		token = trim(token);
-		if (token[0] == DISTANCE_ADDRESSING_START) { /* It is a distance argument */
-			strtok(NULL, delimiters); /* Skip the next one */
-			*(token + strlen(token)) = ','; /* Make the end of the token to be back to what it was */
+		if (token[0] == LAST_ADDRESSING_START && token[1] == LAST_ADDRESSING_START) { /* It is a last argument */
+			if (NULL != *lastArgument)
+			{
+				argument = *lastArgument;
+			}
+			else
+			{
+				addError(holder->errorHolder, "this command request the last src arguments but he doesnt exist", assemblyLine->lineNumber);
+				return FALSE;
+			}
 		}
-		argument = trim(token);
+		else
+		{
+			argument = trim(token);
+		}
 		addressingType = getAddressingType(assemblyLine, argument, holder);
 		addNode(arguments, argument, &addressingType);
 	}
-	return arguments;
 }
 
 int extractCommandReturnTimes(char* assemblyLine)

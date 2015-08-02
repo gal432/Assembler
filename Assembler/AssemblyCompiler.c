@@ -69,9 +69,9 @@ void setEntriesValues(InformationHolder* holder)
 
 void FirstRun(InformationHolder* holder, NodesList* lines) {
 	char* lastArgument = NULL;
-
 	Node* node;
 	AssemblyLine* assemblyLine;
+	
 	while ((node = getNext(lines))) {
 		assemblyLine = (AssemblyLine*)(node->value);
 
@@ -87,6 +87,8 @@ void FirstRun(InformationHolder* holder, NodesList* lines) {
 		else
 			handleInstruction(holder->instructions, assemblyLine, &lastArgument);
 	}
+	if (NULL != lastArgument)
+		free(lastArgument);
 }
 
 void SecondRun(char* name, InformationHolder* holder, NodesList* lines) {
