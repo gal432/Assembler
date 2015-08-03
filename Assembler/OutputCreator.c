@@ -1,5 +1,14 @@
 #include "OutputCreator.h"
 
+int convertToBase4(int src)
+{
+	if (0 == src)
+		return src;
+
+	return (src % 4) + 10 * convertToBase4(src / 4);
+}
+
+
 void createObjectFile(char* name, NodesList* words, int instructsCounter, int dataCounter)
 {
 	Node* wordNode;

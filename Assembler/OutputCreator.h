@@ -6,6 +6,8 @@
 #define ENTRIES_EXTENSION "ent"
 #define EXTRENALS_EXTENSION "ext"
 
+int convertToBase4(int src);
+
 void createObjectFile(char* name, NodesList* words, int instructsCounter, int dataCounter);
 
 void createEntriesFile(char* name, NodesList* entrySymbols);
