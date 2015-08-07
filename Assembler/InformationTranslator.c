@@ -1,6 +1,6 @@
 #include "InformationTranslator.h"
 
-NodesList* translateInforamtion(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols) {
+NodesList* translateInformation(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols) {
 	NodesList* words = createNodesList(sizeof(WordHolder));
 	int wordAddress = MEMORY_ADDRESS_START;
 	

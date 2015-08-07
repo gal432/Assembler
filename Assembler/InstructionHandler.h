@@ -56,7 +56,7 @@ typedef struct
 	ErrorHolder* errorHolder;
 } InstructionsHolder;
 
-Node* searchCommand(NodesList* commands, char* name);
+Command* searchCommand(NodesList* commands, char* name);
 
 InstructionsHolder* CreateInstructions();
 Instruction* createInstruction(Command* command, NodesList* arguments);

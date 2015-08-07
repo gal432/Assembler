@@ -92,7 +92,7 @@ void FirstRun(InformationHolder* holder, NodesList* lines) {
 }
 
 void SecondRun(char* name, InformationHolder* holder, NodesList* lines) {
-	NodesList* words = translateInforamtion(holder->instructions, holder->data, holder->data->symbols, holder->data->externSymbols);
+	NodesList* words = translateInformation(holder->instructions, holder->data, holder->data->symbols, holder->data->externSymbols);
 	
 	createObjectFile(name, words, holder->instructions->counter, holder->data->counter);
 	createEntriesFile(name, holder->data->enterySymbols);

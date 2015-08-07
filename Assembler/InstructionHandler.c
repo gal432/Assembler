@@ -9,9 +9,8 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	char* commandName;
 	char* orginalLine;
 	bool success;
-	Node* node;
-	NodesList* arguments;
 	Command* command;
+	NodesList* arguments;
 	
 	zeroArguments = FALSE;
 	source = 0;
@@ -29,14 +28,13 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 		commandName = assemblyLine->line; 
 		zeroArguments = TRUE;
 	}
-	node = searchCommand(holder->commands, commandName);
+	command = searchCommand(holder->commands, commandName);
 
-	if (NULL == node) {
+	if (NULL == command) {
 		addError(holder->errorHolder, "Command name is invalid", assemblyLine->lineNumber);
 		return;
 	}
 	arguments = createNodesList(sizeof(int));
-	command = (Command*)node->value;
 	
 	returnTimes = extractCommandReturnTimes(orginalLine);
 	if (1 != returnTimes && 2 != returnTimes)
@@ -93,15 +91,18 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	holder->counter += instructionLength;
 }
 
-Node* searchCommand(NodesList* commands, char* name)
+Command* searchCommand(NodesList* commands, char* name)
 {
-	
+	Command* toReturn = safeMalloc(sizeof(Command));
 	Node* currentNode = commands->head;
 
 	while (currentNode)
 	{
 		if (startsWith(name, currentNode->name))
-			return currentNode;
+		{
+			memcpy(toReturn, currentNode->value, sizeof(Command));
+			return toReturn;
+		}	
 		currentNode = currentNode->next;
 	}
 	return NULL;

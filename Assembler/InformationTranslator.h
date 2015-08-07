@@ -10,7 +10,7 @@
 #include "GuidelineHandler.h"
 #include "Word.h"
 
-NodesList* translateInforamtion(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols);
+NodesList* translateInformation(InstructionsHolder* instructionsHolder, GuidelineHolder* guidelineHolder, NodesList* dataSymbols, NodesList* externSymbols);
 
 void translateInstructions(int* wordAddress, NodesList* words, InstructionsHolder* holder, NodesList* dataSymbols, NodesList* externSymbols);
 
