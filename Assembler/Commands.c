@@ -6,7 +6,7 @@ bool checkMovArgs(NodesList* arguments) {
 	return
 		(IMMEDIATE_ADDRESSING_VALUE == sourceArgument || DIRECT_ADDRESSING_VALUE == sourceArgument || LAST_ADDRESSING_VALUE == sourceArgument || DIRECT_REGISTER_ADDRESSING_VALUE == sourceArgument)
 		&&
-		(DIRECT_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
+		(IMMEDIATE_ADDRESSING_VALUE == destinationArgument || DIRECT_ADDRESSING_VALUE == destinationArgument || LAST_ADDRESSING_VALUE == destinationArgument || DIRECT_REGISTER_ADDRESSING_VALUE == destinationArgument);
 }
 
 bool checkCmpArgs(NodesList* arguments) {
