@@ -13,12 +13,13 @@ void createObjectFile(char* name, NodesList* words, int instructsCounter, int da
 {
 	Node* wordNode;
 	WordHolder* wordHolder;
+	
 	FILE* objectFile = createOutputFile(name, OBJECT_EXTENSION);
 	fprintf(objectFile, "%u %u\n", convertToBase4(instructsCounter - MEMORY_ADDRESS_START), convertToBase4(dataCounter));
 	while ((wordNode = getNext(words)))
 	{
 		wordHolder = (WordHolder*)(wordNode->value);
-		fprintf(objectFile, "%u %03u\n",convertToBase4(wordHolder->address), convertToBase4(wordHolder->value));
+		fprintf(objectFile, "%u %06u\n", convertToBase4(wordHolder->address), convertToBase4(wordHolder->value));
 	}
 	fclose(objectFile);
 }
