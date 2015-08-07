@@ -8,7 +8,7 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	int returnTimes;
 	char* commandName;
 	char* orginalLine;
-	
+	bool errors;
 	Node* node;
 	NodesList* arguments;
 	Command* command;
@@ -17,7 +17,7 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	source = 0;
 	destination = 0;
 	instructionLength = 1;
-	bool errors = FALSE;
+	errors = FALSE;
 
 	addInstructionSymbol(holder, assemblyLine);
 	orginalLine = assemblyLine->line;
@@ -119,7 +119,7 @@ bool extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, Inst
 	char* token;
 	char* argument;
 	int addressingType;
-	bool firstArgument = TRUE;
+	
 
 	/* walk through the tokens */
 	for (token = strtok(assemblyLine->line, delimiters); token != NULL; token = strtok(NULL, delimiters))
@@ -143,6 +143,7 @@ bool extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, Inst
 		addressingType = getAddressingType(assemblyLine, argument, holder);
 		addNode(arguments, argument, &addressingType);
 	}
+	return TRUE;
 }
 
 int extractCommandReturnTimes(char* assemblyLine)
@@ -150,7 +151,6 @@ int extractCommandReturnTimes(char* assemblyLine)
 	int length;
 	int i;
 
-	
 	length = strlen(assemblyLine);
 
 	for (i = 0; i < length; i++)
@@ -161,7 +161,7 @@ int extractCommandReturnTimes(char* assemblyLine)
 		}
 	}
 
-	return NULL;
+	return 0;
 }
 int getAddressingType(AssemblyLine* assemblyLine, char* argument, InstructionsHolder* holder) {
 	if (argument[0] == IMMEDIATE_ADDRESSING_START)
@@ -280,7 +280,7 @@ Command* createCommand(int code, int numberOfArguments, bool(*correctArgumentsTy
 	Command* command = (Command*)safeMalloc(sizeof(Command));
 	command->code = code;
 	command->numberOfArguments = numberOfArguments;
-	command->numOfReturnTimes = NULL;
+	command->numOfReturnTimes = 0;
 	command->correctArgumentsTypes = correctArgumentsTypes;
 	return command;
 }
