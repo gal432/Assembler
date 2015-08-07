@@ -123,36 +123,43 @@ ArgumentWord* argumentToWord(int instructionAddress, int wordAddress, Node* argu
 	word = NULL;
 	registerWord = NULL;
 	addressingType = getValueAsInt(argumentNode->value);
-	if (addressingType == IMMEDIATE_ADDRESSING_VALUE){
+	if (addressingType == IMMEDIATE_ADDRESSING_VALUE)
+	{
 		word = (ArgumentWord*)safeMalloc(sizeof(ArgumentWord));
 		parser = argumentNode->name + 1; /* Skip the first char that represents that it's an IMMEDIATE_ADDRESSING */
 		word->value = atoi(parser);
 		word->encodingType = ABSOLUTE_ENCODING;
 	}
-	else if (addressingType == DIRECT_ADDRESSING_VALUE) {
+
+	else if (addressingType == DIRECT_ADDRESSING_VALUE)
+	{
 		word = (ArgumentWord*)safeMalloc(sizeof(ArgumentWord));
-		if ((symbol = searchNode(instructionSymbols, argumentNode->name))) {
+		if ((symbol = searchNode(instructionSymbols, argumentNode->name))) 
+		{
 			word->value = getValueAsInt(symbol->value);
 			word->encodingType = ABSOLUTE_ENCODING;
 		}
-		else if((symbol = searchNode(dataSymbols, argumentNode->name))) {
+		else if((symbol = searchNode(dataSymbols, argumentNode->name)))
+		{
 			word->value = getValueAsInt(symbol->value);
 			word->encodingType = RELOCATABLE_ENCODING;
 		}
-		else if ((symbol = searchNode(externSymbols, argumentNode->name))) {
+		else if ((symbol = searchNode(externSymbols, argumentNode->name)))
+		{
 			word->value = 0;
 			word->encodingType = EXTERNAL_ENCODING;
 			addNode((NodesList*)(symbol->value), NULL, &wordAddress);
 		}
 	}
-	else if (addressingType == DISTANCE_ADDRESSING_VALUE){
+	
+	else if (addressingType == LAST_ADDRESSING_VALUE)
+	{
 		word = (ArgumentWord*)safeMalloc(sizeof(ArgumentWord));
-		translateDistanceToArgument(argumentNode->name, &label1, &label2);
-		label1Value = distanceArgumentAddress(label1, instructionSymbols, dataSymbols, externSymbols);
-		label2Value = distanceArgumentAddress(label2, instructionSymbols, dataSymbols, externSymbols);
-		word->value = getMaxBetweenThree(label1Value - label2Value, label1Value - instructionAddress, label2Value - instructionAddress);
+		//parser = argumentNode->name + 1; /* Skip the first char that represents that it's an IMMEDIATE_ADDRESSING */
+		word->value = atoi(argumentNode->name);
 		word->encodingType = ABSOLUTE_ENCODING;
 	}
+	
 	else if (addressingType == DIRECT_REGISTER_ADDRESSING_VALUE){
 		registerWord = (RegisterArgumentWord*)safeMalloc(sizeof(RegisterArgumentWord));
 		if ((symbol = searchNode(registers, argumentNode->name))) {
