@@ -118,8 +118,8 @@ ArgumentWord* argumentToWord(int instructionAddress, int wordAddress, Node* argu
 	Node* symbol;
 	int addressingType;
 	char* parser;
-	char* label1, *label2;
-	int label1Value, label2Value;
+	
+	
 	word = NULL;
 	registerWord = NULL;
 	addressingType = getValueAsInt(argumentNode->value);
