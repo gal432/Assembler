@@ -8,7 +8,7 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	int returnTimes;
 	char* commandName;
 	char* orginalLine;
-	bool errors;
+	bool success;
 	Node* node;
 	NodesList* arguments;
 	Command* command;
@@ -17,7 +17,7 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	source = 0;
 	destination = 0;
 	instructionLength = 1;
-	errors = FALSE;
+	success = TRUE;
 
 	addInstructionSymbol(holder, assemblyLine);
 	orginalLine = assemblyLine->line;
@@ -48,8 +48,8 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 
 	if (!zeroArguments)
 	{
-		errors = extractCommandParams(arguments, assemblyLine, holder, lastArgument);
-		if (TRUE == errors)
+		success = extractCommandParams(arguments, assemblyLine, holder, lastArgument);
+		if (!success)
 		{
 			*lastArgument = NULL;
 			return;
