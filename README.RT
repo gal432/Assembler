@@ -1,0 +1,4 @@
+Start the program by Run Assembler ps
+the program will search all the file ps.as and 'Assembler' him.
+
+Program run in linux and there is a makefile exist
