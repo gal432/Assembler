@@ -77,13 +77,17 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 		*lastArgument = NULL;
 	}
 
+	/*add the arguments of the command and add if the command exist twise*/
 	instructionLength += arguments->length;
+	instructionLength = instructionLength* returnTimes;
 	
 	if (arguments->length == 2) {
 		destination = getValueAsInt(arguments->tail->value);
 		source = getValueAsInt(arguments->head->value);
+		
 		if (DIRECT_REGISTER_ADDRESSING_VALUE == source && DIRECT_REGISTER_ADDRESSING_VALUE == destination)
-			instructionLength--;
+			instructionLength -= 1 * returnTimes;
+			
 	}
 	addNode(holder->instructions, NULL, createInstruction(command, arguments));
 	holder->counter += instructionLength;
@@ -276,6 +280,7 @@ Command* createCommand(int code, int numberOfArguments, bool(*correctArgumentsTy
 	Command* command = (Command*)safeMalloc(sizeof(Command));
 	command->code = code;
 	command->numberOfArguments = numberOfArguments;
+	command->numOfReturnTimes = NULL;
 	command->correctArgumentsTypes = correctArgumentsTypes;
 	return command;
 }
