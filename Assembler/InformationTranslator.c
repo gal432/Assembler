@@ -155,7 +155,6 @@ ArgumentWord* argumentToWord(int instructionAddress, int wordAddress, Node* argu
 	else if (addressingType == LAST_ADDRESSING_VALUE)
 	{
 		word = (ArgumentWord*)safeMalloc(sizeof(ArgumentWord));
-		//parser = argumentNode->name + 1; /* Skip the first char that represents that it's an IMMEDIATE_ADDRESSING */
 		word->value = atoi(argumentNode->name);
 		word->encodingType = ABSOLUTE_ENCODING;
 	}
