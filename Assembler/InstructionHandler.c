@@ -44,6 +44,7 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 	}
 	command->numOfReturnTimes = returnTimes;
 
+	/*extract parameters*/
 	if (!zeroArguments)
 	{
 		success = extractCommandParams(arguments, assemblyLine, holder, lastArgument);
@@ -93,6 +94,9 @@ void handleInstruction(InstructionsHolder* holder, AssemblyLine* assemblyLine, c
 
 Command* searchCommand(NodesList* commands, char* name)
 {
+	/*
+	Search command and relocate memory for him cause of change the ReturnTimes in Instruction
+	*/
 	Command* toReturn = safeMalloc(sizeof(Command));
 	Node* currentNode = commands->head;
 
@@ -149,6 +153,9 @@ bool extractCommandParams(NodesList* arguments, AssemblyLine* assemblyLine, Inst
 
 int extractCommandReturnTimes(char* assemblyLine)
 {
+	/*
+	extract the return times that the command exist (movX)
+	*/
 	int length;
 	int i;
 

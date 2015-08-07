@@ -21,6 +21,7 @@ void translateInstructions(int* wordAddress, NodesList* words, InstructionsHolde
 	{
 		instruction = (Instruction*)(instructionNode->value);
 
+		/*multiple the instruction by the number of the command exist*/
 		for (i = 0; i < instruction->command->numOfReturnTimes; i++)
 		{
 			instructionAddress = *wordAddress;

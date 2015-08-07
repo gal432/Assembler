@@ -26,6 +26,7 @@ void checkSymbolsUsedInArguments(InformationHolder* holder) {
 		Node* externSymbol = searchNode(holder->data->externSymbols, symbolNode->name);
 		Node* insturctionsSymbol = searchNode(holder->instructions->symbols, symbolNode->name);
 		
+		/*if symbol exist - everything OK*/
 		if (holderSymbol || externSymbol || insturctionsSymbol)
 			continue;
 		
