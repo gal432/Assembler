@@ -2,26 +2,7 @@
 
 #define DEBUG 1
 int main(int argc, char* argv[])
-{
-	/*
-	if (1 == DEBUG)
-	{
-		char* fileName;
-		int i;
-		char assemblyFileName[FILE_NAME_SIZE];
-		NodesList* lines = NULL;
-
-		fileName = "C:\\Temp\\ps.as";
-		//sprintf(assemblyFileName, "%s.as", fileName);
-
-		lines = readLinesToAssemblyList(fileName);
-		compileAssembly(fileName, lines);
-		freeLinesString(lines);
-		freeNodesList(lines);
-		return 0;
-	}
-	*/
-	
+{	
 	char* fileName;
 	int i;
 	char assemblyFileName[FILE_NAME_SIZE];
