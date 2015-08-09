@@ -27,12 +27,15 @@ void createObjectFile(char* name, NodesList* words, int instructsCounter, int da
 void createEntriesFile(char* name, NodesList* entrySymbols)
 {
 	Node* symbolNode;
-	FILE* entriesFile = createOutputFile(name, ENTRIES_EXTENSION);
-	while ((symbolNode = getNext(entrySymbols)))
+	if (entrySymbols->length > 0)
 	{
-		fprintf(entriesFile, "%s %u\n", symbolNode->name, convertToBase4(getValueAsInt(symbolNode->value)));
+		FILE* entriesFile = createOutputFile(name, ENTRIES_EXTENSION);
+		while ((symbolNode = getNext(entrySymbols)))
+		{
+			fprintf(entriesFile, "%s %u\n", symbolNode->name, convertToBase4(getValueAsInt(symbolNode->value)));
+		}
+		fclose(entriesFile);
 	}
-	fclose(entriesFile);
 }
 
 void createExtrenalsFile(char* name, NodesList* externSymbols)
@@ -40,16 +43,20 @@ void createExtrenalsFile(char* name, NodesList* externSymbols)
 	Node* symbolNode;
 	NodesList* addressesList;
 	Node* addressNode;
-	FILE* extrenalsFile = createOutputFile(name, EXTRENALS_EXTENSION);
-	while ((symbolNode = getNext(externSymbols)))
+
+	if (externSymbols->length>0)
 	{
-		addressesList = (NodesList*)(symbolNode->value);
-		while ((addressNode = getNext(addressesList)))
+		FILE* extrenalsFile = createOutputFile(name, EXTRENALS_EXTENSION);
+		while ((symbolNode = getNext(externSymbols)))
 		{
-			fprintf(extrenalsFile, "%s %u\n", symbolNode->name,convertToBase4(getValueAsInt(addressNode->value)));
-		}		
+			addressesList = (NodesList*)(symbolNode->value);
+			while ((addressNode = getNext(addressesList)))
+			{
+				fprintf(extrenalsFile, "%s %u\n", symbolNode->name, convertToBase4(getValueAsInt(addressNode->value)));
+			}
+		}
+		fclose(extrenalsFile);
 	}
-	fclose(extrenalsFile);
 }
 
 FILE* createOutputFile(char* name, char* fileExtension)
